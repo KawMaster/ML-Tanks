@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.Audio;
 
+/*
 [CreateAssetMenu(menuName="Destruction/Controlled Demolition sequence")]
 public class ControlledDemolition : DestructionSequence
 {
@@ -91,3 +92,4 @@ public class ControlledDemolition : DestructionSequence
 		camera.localPosition = basePos;
 	}
 }
+*/

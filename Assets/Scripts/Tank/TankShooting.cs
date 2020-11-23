@@ -18,6 +18,11 @@ public class TankShooting : MonoBehaviour
 	private float m_ChargeSpeed;                // How fast the launch force increases, based on the max charge time.
 	private bool m_Charging;
 
+	public void SetStrength(float input){
+		m_MinLaunchForce = 15f + input;
+		m_MaxLaunchForce = 30f + input;
+	}
+
 	public bool IsCharging
 	{
 		get { return m_Charging; }

@@ -7,8 +7,8 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
 	public int m_NumRoundsToWin = 5;            // The number of rounds a single player has to win to win the game.
-	public float m_StartDelay = 3f;             // The delay between the start of RoundStarting and RoundPlaying phases.
-	public float m_EndDelay = 3f;               // The delay between the end of RoundPlaying and RoundEnding phases.
+	private float m_StartDelay = 0.5f;             // The delay between the start of RoundStarting and RoundPlaying phases.
+	private float m_EndDelay = 0.5f;               // The delay between the end of RoundPlaying and RoundEnding phases.
 	public CameraControl m_CameraControl;       // Reference to the CameraControl script for control during different phases.
 	public Text m_MessageText;                  // Reference to the overlay Text to display winning text, etc.
 	public TankThinker m_TankPrefab;             // Reference to the prefab the players will control.
@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
 	/// </summary>
 	private void SpawnAllTanks()
 	{
+		/*
 		var points = new List<Transform>(SpawnPoints); // creates a new instance of the transform list to hold spawn points
 
 		m_Tanks = new List<TankThinker>(); // list of tanks 
@@ -54,7 +55,9 @@ public class GameManager : MonoBehaviour
 			points.RemoveAt(spawnPointIndex); // removes used spawn point
 
 			m_Tanks.Add(tank); // adds tank to tanks list
-		}
+		*/
+			
+		
 	}
 
 
