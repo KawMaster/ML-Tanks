@@ -6,17 +6,26 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+	// general
 	public int m_NumRoundsToWin = 5;            // The number of rounds a single player has to win to win the game.
-	private float m_StartDelay = 0.5f;             // The delay between the start of RoundStarting and RoundPlaying phases.
-	private float m_EndDelay = 0.5f;               // The delay between the end of RoundPlaying and RoundEnding phases.
-	public CameraControl m_CameraControl;       // Reference to the CameraControl script for control during different phases.
 	public Text m_MessageText;                  // Reference to the overlay Text to display winning text, etc.
-	public TankThinker m_TankPrefab;             // Reference to the prefab the players will control.
+
+	// game refrences
+	public CameraControl m_CameraControl;       // Reference to the CameraControl script for control during different phases.
 	public Transform[] SpawnPoints; // Declares spawn points for tanks to appear at
-		
+	public TankFactory tankFacotry;
+	public SimData simData;
+	public Simulation simulation;
+
+	// scene timing
+	private float m_StartDelay = 0.5f;             // The delay between the start of RoundStarting and RoundPlaying phases.
+	private float m_EndDelay = 0.5f;               // The delay between the end of RoundPlaying and RoundEnding phases.	
 	private WaitForSeconds m_StartWait;         // Used to have a delay whilst the round starts.
 	private WaitForSeconds m_EndWait;           // Used to have a delay whilst the round or game ends.
-	private List<TankThinker> m_Tanks; 
+
+	// ai/ml
+	public TankThinker m_TankPrefab;             // Reference to the prefab the players will control.
+	private List<GameObject> m_Tanks = new List<GameObject>(); 
 
 	private void Start()
 	{
@@ -56,7 +65,33 @@ public class GameManager : MonoBehaviour
 
 			m_Tanks.Add(tank); // adds tank to tanks list
 		*/
-			
+
+
+		// testing
+		simData.SetTankCount(1,0);
+		simData.SetTankCount(1,1);
+		simData.SetTankSpecs(new int[]{1,1,1,}, 0);
+		simData.SetTankSpecs(new int[]{1,1,1,}, 1);
+
+
+		int[,] tankSpecs = simData.GetTankSpecs();
+
+		for (int i = 0; i < 2; i++){
+			print("1");
+			int count = simData.GetTankCounts()[i];
+			for(int j = 0; j < count; j++){
+				print("2");
+
+				int[] specs = {tankSpecs[i,0], tankSpecs[i,1], tankSpecs[i,2]};
+				GameObject newTank = tankFacotry.createTank(specs);
+				newTank.transform.position = SpawnPoints[i].position;
+
+				m_Tanks.Add(newTank); // for camera
+				simulation.GetFlock(i).addTank(newTank);
+				print("3");
+			}
+			print("4");
+		}
 		
 	}
 
@@ -71,6 +106,7 @@ public class GameManager : MonoBehaviour
 		{
 			// ... set it to the appropriate tank transform.
 			m_CameraControl.m_Targets[i] = m_Tanks[i].transform;
+			print(m_Tanks[i].transform);
 		}
 	}
 
@@ -83,6 +119,7 @@ public class GameManager : MonoBehaviour
 		// Start off by running the 'RoundStarting' coroutine but don't return until it's finished.
 		yield return StartCoroutine (RoundStarting ());
 
+		/*
 		// Once the 'RoundStarting' coroutine is finished, run the 'RoundPlaying' coroutine but don't return until it's finished.
 		yield return StartCoroutine (RoundPlaying());
 
@@ -98,6 +135,7 @@ public class GameManager : MonoBehaviour
 		{
 			SceneManager.LoadScene(1, LoadSceneMode.Single);
 		}
+		*/
 	}
 
 
@@ -159,8 +197,8 @@ public class GameManager : MonoBehaviour
 	{
 		for (int i = 0; i < m_Tanks.Count; i++)
 		{
-			if (m_Tanks[i])
-				m_Tanks[i].enabled = true;
+			//if (m_Tanks[i])
+				//m_Tanks[i].enabled = true;
 		}
 	}
 
@@ -169,8 +207,8 @@ public class GameManager : MonoBehaviour
 	{
 		for (int i = 0; i < m_Tanks.Count; i++)
 		{
-			if (m_Tanks[i])
-				m_Tanks[i].enabled = false;
+			//if (m_Tanks[i])
+				//m_Tanks[i].enabled = false;
 		}
 	}
 }

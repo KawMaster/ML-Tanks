@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class TankHealth : MonoBehaviour
 {
     private float m_StartingHealth = 100f;               // The amount of health each tank starts with.
-    private Slider m_Slider;                             // The slider to represent how much health the tank currently has.
+    public Slider m_Slider;                             // The slider to represent how much health the tank currently has.
     public GameObject m_ExplosionPrefab;                // A prefab that will be instantiated in Awake, then used whenever the tank dies.
     public GameObject m_DeadTankPrefab;
     public Image m_FillImage;                           // The image component of the slider.

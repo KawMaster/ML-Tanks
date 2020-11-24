@@ -8,14 +8,10 @@ public class SimData : MonoBehaviour
  	// agents data
 
 	// Use this for initialization
-	void Start () {
+	public void Start () {
 		sideData = new SideData[2];
-		sideData[0].Start();
-		sideData[1].Start();
-
-		//Debug
-		print(sideData[0].Output());
-		print(sideData[1].Output());		
+		sideData[0] = new SideData();
+		sideData[1] = new SideData();	
 	}
 	
 	// Update is called once per frame
@@ -49,7 +45,7 @@ class SideData
 	private int tankCount;
 	private int[] tankSpecs;
 
-	public void Start(){
+	public SideData(){
 		tankCount = 0;
 		tankSpecs = new int[3] {0,0,0};
 	}

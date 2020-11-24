@@ -16,8 +16,4 @@ public class TankFactory : MonoBehaviour{
 
 		return newTank;
 	}
-
-	// set the scripts
-
-	// set the constants
 }

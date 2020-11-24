@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class Simulation : MonoBehaviour {
 
-	public TankFlock[] flocks;
+	private TankFlock[] flocks;
 
-
-	// Use this for initialization
 	void Start () {
-		
+		flocks = new TankFlock[2];
+		flocks[0] = new TankFlock();
+		flocks[1] = new TankFlock();
+	}
+
+	public TankFlock GetFlock(int input){
+		return flocks[input];
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }
