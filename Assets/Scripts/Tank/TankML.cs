@@ -1,7 +1,7 @@
-// using UnityEngine;
-// using UnityEngine.UI;
-// using Unity.MLAgents;
-// using Unity.MLAgents.Sensors;
+using UnityEngine;
+using UnityEngine.UI;
+using Unity.MLAgents;
+using Unity.MLAgents.Sensors;
 
 
 // // Basic Tank ML-Agents File
@@ -157,3 +157,11 @@
 //         }
 //     }
 // }
+
+public class TankML : Agent
+{
+    private Vector3? startPosition;
+    private Quaternion startRotation;
+    public Vector3? StartPosition { set { startPosition = value; } }
+    public Quaternion StartRotation { set { startRotation = value; } }
+}
