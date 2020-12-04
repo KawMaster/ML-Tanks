@@ -16,6 +16,7 @@ public class TankHealth : MonoBehaviour
     private float m_CurrentHealth;                      // How much health the tank currently has.
     private bool m_Dead;                                // Has the tank been reduced beyond zero health yet?
 
+    public string name = "";                            // For simobserver
 
     public void SetHealth(float input){
         m_StartingHealth = input * 100;
@@ -45,11 +46,14 @@ public class TankHealth : MonoBehaviour
         SetHealthUI();
     }
 
-
     public void TakeDamage (float amount)
     {
         // Reduce current health by the amount of damage done.
         m_CurrentHealth -= amount;
+
+        // Notify observers, ideally placed somewhere else
+        string message = "Tank " + name + " just took " + amount + " damage.";
+        gameObject.GetComponent<TankObservable>().Notify(message);
 
         // Change the UI elements appropriately.
         SetHealthUI ();
@@ -88,6 +92,10 @@ public class TankHealth : MonoBehaviour
         m_ExplosionAudio.Play();
 
 	    Instantiate(m_DeadTankPrefab, transform.position, transform.rotation);
+
+        // Notify observers, ideally placed somewhere else
+        string message = "Tank " + name + " just got destroyed.";
+        gameObject.GetComponent<TankObservable>().Notify(message);
 
         // Turn the tank off.
         gameObject.SetActive (false);

@@ -4,13 +4,20 @@ using UnityEngine;
 
 public class SimObserver : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
+	private string log;
+
+	public void Start(){
+		log = "";
+		print("Observer initialized");
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+	public void OnNotify(string message)
+    {
+        log += message + "\n";
+        print(message);
+    }
+
+    public string GetData(){
+    	return log;
+    }
 }

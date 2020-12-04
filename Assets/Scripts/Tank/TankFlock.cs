@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class TankFlock : MonoBehaviour{
 
-	private List<GameObject> tanks = new List<GameObject>();
+	private List<GameObject> tanks;
+
+	public void Start(){
+		tanks = new List<GameObject>();
+	} 
 
 	public void addTank(GameObject tank){
 		tanks.Add(tank);

@@ -12,10 +12,6 @@ public class GameManager : MonoBehaviour
 
 	// game refrences
 	public CameraControl m_CameraControl;       // Reference to the CameraControl script for control during different phases.
-	public Transform[] SpawnPoints; // Declares spawn points for tanks to appear at
-	public TankFactory tankFacotry;
-	public SimData simData;
-	public Simulation simulation;
 
 	// scene timing
 	private float m_StartDelay = 0.5f;             // The delay between the start of RoundStarting and RoundPlaying phases.
@@ -41,61 +37,7 @@ public class GameManager : MonoBehaviour
 	}
 */
 	public void StartSimulation(){
-		StartCoroutine (GameLoop ());
-	}
-
-	/// <summary>
-	/// Method to spawn tanks and relative scripts for tanks
-	/// </summary>
-	private void SpawnAllTanks()
-	{
-		/*
-		var points = new List<Transform>(SpawnPoints); // creates a new instance of the transform list to hold spawn points
-
-		m_Tanks = new List<TankThinker>(); // list of tanks 
-		Debug.Log(GameState.Instance.players);
-
-		foreach (GameState.PlayerState state in GameState.Instance.players)
-		{
-			Debug.Log("Spawn Player");
-			var spawnPointIndex = Random.Range(0, points.Count); // chooses a random spawn point for each player (tank)
-
-			// ... create them, set their player number and references needed for control.
-			var tank = Instantiate(m_TankPrefab); // instantiates player with player prefab
-			tank.Setup(state, points[spawnPointIndex]); // Setup player and corresponding spawn point
-
-			points.RemoveAt(spawnPointIndex); // removes used spawn point
-
-			m_Tanks.Add(tank); // adds tank to tanks list
-		*/
-
-
-		// testing
-		simData.SetTankCount(1,0);
-		simData.SetTankCount(1,1);
-		simData.SetTankSpecs(new int[]{1,1,1,}, 0);
-		simData.SetTankSpecs(new int[]{1,1,1,}, 1);
-
-
-		int[,] tankSpecs = simData.GetTankSpecs();
-
-		for (int i = 0; i < 2; i++){
-			print("1");
-			int count = simData.GetTankCounts()[i];
-			for(int j = 0; j < count; j++){
-				print("2");
-
-				int[] specs = {tankSpecs[i,0], tankSpecs[i,1], tankSpecs[i,2]};
-				GameObject newTank = tankFacotry.createTank(specs);
-				newTank.transform.position = SpawnPoints[i].position;
-
-				m_Tanks.Add(newTank); // for camera
-				simulation.GetFlock(i).addTank(newTank);
-				print("3");
-			}
-			print("4");
-		}
-		
+		//StartCoroutine (GameLoop ());
 	}
 
 	public void SetCameraTargets(TankFlock[] tankFlocks, int[] flockSize)
@@ -126,16 +68,19 @@ public class GameManager : MonoBehaviour
 	{
 		GameSettings.Instance.OnBeginRound();
 
+		print("a");
 		// Start off by running the 'RoundStarting' coroutine but don't return until it's finished.
 		yield return StartCoroutine (RoundStarting ());
 
-		/*
+		print("b");
 		// Once the 'RoundStarting' coroutine is finished, run the 'RoundPlaying' coroutine but don't return until it's finished.
 		yield return StartCoroutine (RoundPlaying());
 
+		print("c");
 		// Once execution has returned here, run the 'RoundEnding' coroutine, again don't return until it's finished.
 		yield return StartCoroutine (RoundEnding());
 
+		/*
 		// This code is not run until 'RoundEnding' has finished.  At which point, check if a game winner has been found.
 		if (GameSettings.Instance.ShouldFinishGame())
 		{
