@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿/*** <ML-TANKS CODE> ***/
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -58,7 +59,7 @@ public class SimManager : MonoBehaviour {
 		}
 
 		simRefrence.InitTankFlocks(data);
-		simRefrence.StartSim();
+		//simRefrence.StartSim();
 	}
 
 	public SimData GetData(){

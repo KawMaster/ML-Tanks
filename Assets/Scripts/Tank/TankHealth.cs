@@ -46,6 +46,7 @@ public class TankHealth : MonoBehaviour
         SetHealthUI();
     }
 
+    /*** <ML-TANKS CODE> ***/
     public void TakeDamage (float amount)
     {
         // Reduce current health by the amount of damage done.
@@ -64,7 +65,7 @@ public class TankHealth : MonoBehaviour
             OnDeath ();
         }
     }
-
+    /*** </ML-TANKS CODE> ***/
 
     private void SetHealthUI ()
     {

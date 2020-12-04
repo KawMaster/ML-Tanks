@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿/*** <ML-TANKS CODE> ***/
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -49,11 +50,6 @@ public class Simulation : MonoBehaviour {
 
 		// add tank to gamemanager
 		gameManager.SetCameraTargets(flocks, tankCounts);
-	}
-
-	public void StartSim(){
-		// start gamemanager
-		gameManager.StartSimulation();
 	}
 
 	public TankFlock GetFlock(int input){

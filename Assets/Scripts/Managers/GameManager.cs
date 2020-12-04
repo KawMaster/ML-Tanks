@@ -22,24 +22,9 @@ public class GameManager : MonoBehaviour
 	// ai/ml
 	public TankThinker m_TankPrefab;             // Reference to the prefab the players will control.
 	private List<GameObject> m_Tanks = new List<GameObject>(); 
-/*
-	private void Start()
-	{
-		// Create the delays so they only have to be made once.
-		m_StartWait = new WaitForSeconds (m_StartDelay);
-		m_EndWait = new WaitForSeconds (m_EndDelay);
 
-		SpawnAllTanks(); // Spawn tanks and corresponding scripts
-		SetCameraTargets();
 
-		// Once the tanks have been created and the camera is using them as targets, start the game.
-		StartCoroutine (GameLoop ());
-	}
-*/
-	public void StartSimulation(){
-		//StartCoroutine (GameLoop ());
-	}
-
+	/*** <ML-TANKS CODE> ***/
 	public void SetCameraTargets(TankFlock[] tankFlocks, int[] flockSize)
 	{
 		int tankCounts = flockSize[0] + flockSize[1];
@@ -62,35 +47,18 @@ public class GameManager : MonoBehaviour
 			counter += 1;
 		}
 	}
+		/*** </ML-TANKS CODE> ***/
 
 	// This is called from start and will run each phase of the game one after another.
 	private IEnumerator GameLoop ()
 	{
 		GameSettings.Instance.OnBeginRound();
-
-		print("a");
 		// Start off by running the 'RoundStarting' coroutine but don't return until it's finished.
 		yield return StartCoroutine (RoundStarting ());
-
-		print("b");
 		// Once the 'RoundStarting' coroutine is finished, run the 'RoundPlaying' coroutine but don't return until it's finished.
 		yield return StartCoroutine (RoundPlaying());
-
-		print("c");
 		// Once execution has returned here, run the 'RoundEnding' coroutine, again don't return until it's finished.
 		yield return StartCoroutine (RoundEnding());
-
-		/*
-		// This code is not run until 'RoundEnding' has finished.  At which point, check if a game winner has been found.
-		if (GameSettings.Instance.ShouldFinishGame())
-		{
-			SceneManager.LoadScene (2);
-		}
-		else
-		{
-			SceneManager.LoadScene(1, LoadSceneMode.Single);
-		}
-		*/
 	}
 
 
