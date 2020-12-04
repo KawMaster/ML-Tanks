@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
 	// ai/ml
 	public TankThinker m_TankPrefab;             // Reference to the prefab the players will control.
 	private List<GameObject> m_Tanks = new List<GameObject>(); 
-
+/*
 	private void Start()
 	{
 		// Create the delays so they only have to be made once.
@@ -39,7 +39,10 @@ public class GameManager : MonoBehaviour
 		// Once the tanks have been created and the camera is using them as targets, start the game.
 		StartCoroutine (GameLoop ());
 	}
-
+*/
+	public void StartSimulation(){
+		StartCoroutine (GameLoop ());
+	}
 
 	/// <summary>
 	/// Method to spawn tanks and relative scripts for tanks
@@ -95,21 +98,28 @@ public class GameManager : MonoBehaviour
 		
 	}
 
-
-	private void SetCameraTargets()
+	public void SetCameraTargets(TankFlock[] tankFlocks, int[] flockSize)
 	{
-		// Create a collection of transforms the same size as the number of tanks.
-		m_CameraControl.m_Targets = new Transform[m_Tanks.Count];
+		int tankCounts = flockSize[0] + flockSize[1];
 
-		// For each of these transforms...
-		for (int i = 0; i < m_Tanks.Count; i++)
+		// Create a collection of transforms the same size as the number of tanks.
+		m_CameraControl.m_Targets = new Transform[tankCounts];
+
+		int counter = 0;
+		for (int i = 0; i < flockSize[0]; i++)
 		{
 			// ... set it to the appropriate tank transform.
-			m_CameraControl.m_Targets[i] = m_Tanks[i].transform;
-			print(m_Tanks[i].transform);
+			m_CameraControl.m_Targets[counter] = tankFlocks[0].getTank(i).transform;
+			counter += 1;
+		}
+
+		for (int i = 0; i < flockSize[1]; i++)
+		{
+			// ... set it to the appropriate tank transform.
+			m_CameraControl.m_Targets[counter] = tankFlocks[1].getTank(i).transform;
+			counter += 1;
 		}
 	}
-
 
 	// This is called from start and will run each phase of the game one after another.
 	private IEnumerator GameLoop ()

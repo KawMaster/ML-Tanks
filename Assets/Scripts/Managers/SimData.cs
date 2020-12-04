@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SimData : MonoBehaviour
+public class SimData 
  {
  	private SideData[] sideData;
  	// agents data
 
 	// Use this for initialization
-	public void Start () {
+	public SimData() {
 		sideData = new SideData[2];
 		sideData[0] = new SideData();
 		sideData[1] = new SideData();	
