@@ -4,7 +4,7 @@ public class Tank : Agent
 {
 
 
-    [Header("Game stuff")]
+    [Header("Tank Components")]
     public float Speed;
     public float RotateSpeed;
     public float BulletSpeed;
@@ -12,12 +12,12 @@ public class Tank : Agent
     public float BulletHeight;
     public float ShootCooldown;
     public float DeadCooldown;
-    public int Bullets;
+    public int Bullets;weuiii
     public GameObject BulletPrefab;
     public GameObject TankModel;
     public GameObject GhostModel;
 
-    [Header("AI Stuff")]
+    [Header("RL Rewards / Penalties")]
     public float KillReward = 1;
     public float ShootReward = 0.05f;
     public float DeathPenalty = -1;
