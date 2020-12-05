@@ -17,3 +17,6 @@ This project takes the Tanks tutorial by Unity and sets up a model with Unity's 
     ``` Assets/Scenes/MainMenu.unity ```
 
 4. Then Click the Play Button.
+
+
+The video can be viewed [here](presentationvideo.mp4)
